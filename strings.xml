@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">RegistrationForm</string>
+
+    <!-- form strings -->
+    <string name="Title">HAMS</string>
+    <string name="FirstName">First Name</string>
+    <string name="LastName">Last Name</string>
+    <string name="Email">Email</string>
+    <string name="Password">Password</string>
+    <string name="PhoneNumber">Phone Number</string>
+    <string name="StreetNum">Address</string>
+    <string name="HealthCardNumber">Health Card Number</string>
+    <string name="City">City</string>
+    <string name="Street">Street</string>
+    <string name="ProvTeri">Province/Territory</string>
+    <string name="ButtonText">Register</string>
+
+</resources>
