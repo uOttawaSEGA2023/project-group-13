@@ -67,12 +67,12 @@ public class RegisterDoctor extends AppCompatActivity {
 
             // don't forget it's !matches since we want to check that it doesn't follow the criteria!!!
 
-            if(!(Pattern.compile("^[A-za-z]+").matcher(((EditText) findViewById(R.id.FirstName)).getText().toString())).matches()){
+            if(!(Pattern.compile("^[A-za-z ]+").matcher(((EditText) findViewById(R.id.FirstName)).getText().toString())).matches()){
                 throw new IllegalArgumentException("Please enter your first name");
             }
             newDoc.setfName(((EditText) findViewById(R.id.FirstName)).getText().toString());
 
-            if(!(Pattern.compile("^[A-za-z]+").matcher(((EditText) findViewById(R.id.LastName)).getText().toString())).matches()){
+            if(!(Pattern.compile("^[A-za-z ]+").matcher(((EditText) findViewById(R.id.LastName)).getText().toString())).matches()){
                 throw new IllegalArgumentException("Please enter your last name");
             }
             newDoc.setlName(((EditText) findViewById(R.id.LastName)).getText().toString());
