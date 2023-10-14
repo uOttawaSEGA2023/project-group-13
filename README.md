@@ -1,4 +1,4 @@
-Admin login: user: admin@admin.com pass: password 
+Admin login: user: user@admin.com pass: password 
 
 -- Group Information--
 
