@@ -1,7 +1,5 @@
 Admin login: user: user@admin.com pass: password 
 
-Google drive link to entire project zip folder: https://drive.google.com/file/d/10eCmyzWpLcWBOwmfNdOvnAc0vkXmtdFL/view?usp=sharing
-
 -- Group Information --
 
 Lydia Roy 300309479
