@@ -1,3 +1,0 @@
-com.uottawa.eecs.SEGDeliverable1.test
-style WhiteBackgroundDialogTheme
-style WhiteBackgroundTheme
