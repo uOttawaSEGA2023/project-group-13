@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="light_blue">#75BBD6</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="Address">Street Number</string>
+    <string name="ButtonText">Register</string>
+    <string name="City">City</string>
+    <string name="Email">Email</string>
+    <string name="EmployeeNumber">Employee Number</string>
+    <string name="FirstName">First Name</string>
+    <string name="HealthCardNumber">Health Card Number</string>
+    <string name="LastName">Last Name</string>
+    <string name="Password">Password</string>
+    <string name="PhoneNumber">Phone Number</string>
+    <string name="ProvTeri">Province/Territory Abbreviation</string>
+    <string name="Street">Street</string>
+    <string name="Title">HAMS</string>
+    <string name="anes">Anesthesiology</string>
+    <string name="app_name">SEGDeliverable1</string>
+    <string name="cardi">Cardiology</string>
+    <string name="emer">Emergency Medicine</string>
+    <string name="fami">Family Medicine</string>
+    <string name="gast">Gastroenterology</string>
+    <string name="gene">General Surgery</string>
+    <string name="geri">Geriatric Medicine</string>
+    <string name="inte">Internal Medicine</string>
+    <string name="neul">Neurology</string>
+    <string name="onc">Oncology</string>
+    <string name="pedi">Pediatrics</string>
+    <string name="psyc">Psychiatry</string>
+    <string name="radi">Radiology</string>
+    <string name="specialTitle">Select Your Specialization(s):</string>
+    <string name="urol">Urology</string>
+    <style name="Base.Theme.SEGDeliverable1" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+    </style>
+    <style name="Theme.SEGDeliverable1" parent="Base.Theme.SEGDeliverable1"/>
+</resources>
