@@ -11,3 +11,5 @@ Kayla Cameron 300319103
 Maryse Kavwahirehi 300290537
 
 Esosa Woghiren 300208204
+
+Arielle Gatotos 300199427
