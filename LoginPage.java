@@ -58,7 +58,7 @@ public class LoginPage extends AppCompatActivity {
                 String loginPassword = password.getText().toString();
 
                 try {
-                    Checkusername(loginUsername);
+                    CheckUsername(loginUsername);
                     CheckPassword(loginPassword);
                 } catch(Exception e) {
                     Toast.makeText(LoginPage.this, "ERROR: " +e.getMessage() , Toast.LENGTH_LONG).show();
@@ -93,7 +93,7 @@ public class LoginPage extends AppCompatActivity {
                                    Toast.makeText(LoginPage.this, "Unable to login since your request has not been processed", Toast.LENGTH_LONG).show();
                                }
                                else if(status == -1){
-                                   Toast.makeText(LoginPage.this, "Unable to login since your request has been rejected", Toast.LENGTH_LONG).show();
+                                   Toast.makeText(LoginPage.this, "Unable to login since your request has been rejected. Contact admin at 123-456-7890 to resolve this issue.", Toast.LENGTH_LONG).show();
 
                                }
                                else {
@@ -151,7 +151,7 @@ public class LoginPage extends AppCompatActivity {
 
 
     //validation checks for inputs 
-    public void Checkusername(String email){
+    public void CheckUsername(String email){
         if(!(Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9+_.-]+\\.[A-Za-z]{2,}$").matcher(email).matches())) {
             throw new IllegalArgumentException("Please enter a valid email, ex: example@email.com");
         }
