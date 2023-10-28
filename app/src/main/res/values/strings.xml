@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">SEGDeliverable2</string>
+
+    <!-- form strings -->
+    <string name="Title">HAMS</string>
+    <string name="FirstName">First Name</string>
+    <string name="LastName">Last Name</string>
+    <string name="Email">Email</string>
+    <string name="Password">Password</string>
+    <string name="PhoneNumber">Phone Number</string>
+    <string name="Address">Street Number</string>
+    <string name="Street">Street</string>
+    <string name="EmployeeNumber">Employee Number</string>
+    <string name="ProvTeri">Province/Territory Abbreviation</string>
+    <string name="City">City</string>
+    <string name="specialTitle">Select Your Specialization(s):</string>
+    <string name="HealthCardNumber">Health Card Number</string>
+    <string name="ButtonText">Register</string>
+
+    <!-- string for the specialization choices (alphabetized)-->
+    <string name="anes">Anesthesiology</string>
+    <string name="cardi">Cardiology</string>
+    <string name="emer">Emergency Medicine</string>
+    <string name="fami">Family Medicine</string>
+    <string name="gast">Gastroenterology</string>
+    <string name="gene">General Surgery</string>
+    <string name="geri">Geriatric Medicine</string>
+    <string name="inte">Internal Medicine</string>
+    <string name="neul">Neurology</string>
+    <string name="onc">Oncology</string>
+    <string name="pedi">Pediatrics</string>
+    <string name="psyc">Psychiatry</string>
+    <string name="radi">Radiology</string>
+    <string name="urol">Urology</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

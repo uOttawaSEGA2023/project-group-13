@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="6dp"
+    android:elevation="6dp"
+    app:cardUseCompatPadding="true" >
+
+
+    <!-- Need to add items-->
+    <!-- android:text will probably be moved-->
+    <!-- personIcon will probably be replaced with a 'D' or a 'P' to identify patients and doctors?-->
+   <!-- for now it can just be a text field im lazy-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:background="#acbcbd">
+
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/personIcon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/baseline_person_24"></androidx.constraintlayout.utils.widget.ImageFilterView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id= "@+id/TypeText"
+            android:text="Doc/Pat"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@id/personIcon"
+
+            ></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id= "@+id/FirstNameText"
+            android:text="First Name"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@id/personIcon"
+            android:layout_below="@id/TypeText"
+
+            ></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id= "@+id/LastNameText"
+            android:text="Last Name"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@id/personIcon"
+            android:layout_below="@+id/FirstNameText"
+            ></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id= "@+id/EmailText"
+            android:text="Email"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@id/personIcon"
+            android:layout_below="@+id/LastNameText"
+            ></TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id= "@+id/PhoneNumberText"
+            android:text="Phone Number"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@id/personIcon"
+            android:layout_below="@+id/EmailText"
+            ></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id= "@+id/StreetNumberText"
+            android:text="Street Number"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@id/personIcon"
+            android:layout_below="@+id/PhoneNumberText"
+            ></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id= "@+id/StreetText"
+            android:text="Street"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@id/personIcon"
+            android:layout_below="@+id/StreetNumberText"
+            ></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id= "@+id/CityText"
+            android:text="City"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@id/personIcon"
+            android:layout_below="@+id/StreetText"
+            ></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id= "@+id/ProvinceText"
+            android:text="Province/Territory"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@id/personIcon"
+            android:layout_below="@+id/CityText"
+            ></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id= "@+id/NumberText"
+            android:text="Employee/Health Card Number"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@id/personIcon"
+            android:layout_below="@+id/ProvinceText"
+            ></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id= "@+id/SpecialtiesText"
+            android:text="Specialties"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@id/personIcon"
+            android:layout_below="@+id/NumberText"
+            ></TextView>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/AcceptButton"
+            android:text="Accept"
+            android:onClick="acceptOnClick"
+            android:layout_below="@id/SpecialtiesText"
+            android:layout_toRightOf="@id/personIcon"
+            android:layout_marginTop="10dp"
+
+
+            ></Button>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/RejectButton"
+            android:text="Reject"
+            android:onClick="rejectOnClick"
+            android:layout_below="@id/SpecialtiesText"
+            android:layout_toRightOf="@id/AcceptButton"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+
+
+            ></Button>
+
+        </RelativeLayout>
+</androidx.cardview.widget.CardView>
