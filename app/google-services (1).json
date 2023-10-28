@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "641071377326",
+    "project_id": "hams-seg2105-41953",
+    "storage_bucket": "hams-seg2105-41953.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:641071377326:android:a762f6ebd2824ed1deb63f",
+        "android_client_info": {
+          "package_name": "com.uottawa.eecs.SEGDeliverable1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDv8HjKm6JzE_csDFax2KxR2j9nsbuuHMA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
