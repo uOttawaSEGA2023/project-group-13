@@ -1,6 +1,8 @@
 package com.uottawa.eecs.SEGDeliverable2;
 // import to store specialties   
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.LocalTime;
  
 public class Doctor extends Person {
     /*
@@ -10,12 +12,15 @@ public class Doctor extends Person {
 
     private ArrayList<String> specialty;
 
+    private ArrayList<Shift> shifts; // upcoming shifts
+
 
     //constructors
     public Doctor(String fName, String lName, String email, String pWord, String pNum, String emNum, ArrayList<String> specialty, String type) {
         super(fName, lName, email, pWord, pNum, type);
         this.emNum = emNum;
         this.specialty = specialty;
+        this.shifts = new ArrayList<Shift>();
 
 
     }
@@ -46,6 +51,10 @@ public class Doctor extends Person {
         specialty.clear();
     }
 
+    public void addShift(Shift newShift) { shifts.add(newShift); }
+
+    public void removeShift(Shift oldShift) { shifts.remove(oldShift); }
+
     /*
      * Getter Methods
      */
@@ -54,4 +63,7 @@ public class Doctor extends Person {
     }
 
     public ArrayList<String> getSpecialty() {return specialty;}
+
+    public ArrayList<Shift> getShifts() { return shifts; }
+
 }
