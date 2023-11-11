@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".MainActivity">
+
+    <!-- Figure out a way to add a card everytime a button is clicked-->
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:padding="24dp"
+
+            >
+
+            <TextView
+                android:id="@+id/UpcomingShift"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Shift"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                />
+            <TextView
+                android:id="@+id/showDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+
+                >
+
+
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/showTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center">
+
+            </TextView>
+
+
+
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+<!--    <Button-->
+<!--        android:id="@+id/addShift"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="AddShift"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginRight="16dp"-->
+
+<!--        />-->
+
+
+
+
+    <!-- Should create a card view with shift -->
+
+
+
+
+
+
+
+</RelativeLayout>
