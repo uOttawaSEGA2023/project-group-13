@@ -34,5 +34,6 @@
     <string name="urol">Urology</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_doc_shifts">Doc_Shifts</string>
 
 </resources>

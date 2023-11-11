@@ -33,6 +33,9 @@ public class Welcomepage extends AppCompatActivity {
 
                 if(userTypes.getString("Occupation").equals("Admin")) {
                     OpenAdminHomePage();
+                } else if (userTypes.getString("Occupation").equals("Doctor")) {
+                    OpenDoctorShift();
+                    
                 } else {
                     OpenLogoutPage();
                 }
@@ -48,6 +51,12 @@ public class Welcomepage extends AppCompatActivity {
     public void OpenAdminHomePage(){
         Intent intent = new Intent(this, AdminHomePage.class);
         startActivity(intent);
+    }
+
+    public void OpenDoctorShift(){
+        Intent intent = new Intent(this, DoctorShiftsActivity.class);
+        startActivity(intent);
+
     }
 
 

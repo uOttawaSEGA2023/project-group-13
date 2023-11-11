@@ -9,6 +9,8 @@ public class Doctor extends Person {
     private String emNum;
 
     private ArrayList<String> specialty;
+    private ArrayList<Shift> shifts;
+
 
 
     //constructors
@@ -16,6 +18,7 @@ public class Doctor extends Person {
         super(fName, lName, email, pWord, pNum, type);
         this.emNum = emNum;
         this.specialty = specialty;
+        this.shifts = new ArrayList<>();
 
 
     }
@@ -54,4 +57,7 @@ public class Doctor extends Person {
     }
 
     public ArrayList<String> getSpecialty() {return specialty;}
+    public ArrayList<Shift> getShifts() {
+        return shifts;
+    }
 }

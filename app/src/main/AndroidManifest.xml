@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"> </uses-permission>
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -15,11 +15,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SEGDeliverable1"
         tools:targetApi="31">
-
+        <activity
+            android:name=".DoctorShiftsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Doc_Shifts"
+            android:exported="false"
+            android:label="@string/title_activity_doc_shifts"
+            android:theme="@style/Theme.SEGDeliverable1" />
         <activity
             android:name=".LogoutPage"
             android:exported="false" />
-
         <activity
             android:name=".RegisterMenu"
             android:exported="false" />
@@ -32,30 +38,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".RegisterDoctor"
-            android:theme="@style/Theme.Material3.Light.NoActionBar"
-            android:exported="true">
-
-        </activity>
-
-        <activity android:name=".RegisterPatient" android:theme="@style/Theme.Material3.Light.NoActionBar" android:exported="true">
-        </activity>
-        <!--<meta-data android:name="preloaded_fonts" android:resource="@array/preloaded_fonts"/>-->
-
+            android:exported="true"
+            android:theme="@style/Theme.Material3.Light.NoActionBar" />
+        <activity
+            android:name=".RegisterPatient"
+            android:exported="true"
+            android:theme="@style/Theme.Material3.Light.NoActionBar" /> <!-- <meta-data android:name="preloaded_fonts" android:resource="@array/preloaded_fonts"/> -->
         <activity
             android:name=".Welcomepage"
             android:exported="false" />
         <activity
             android:name=".LoginPage"
-            android:exported="true">
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".AdminHomePage"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
     </application>
+
 </manifest>
