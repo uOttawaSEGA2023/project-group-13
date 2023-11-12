@@ -7,9 +7,12 @@ public class Shift {
     private String startTime;
     private String endTime;
 
+
     // Default constructor required for Firebase
     public Shift() {
     }
+
+
 
     public Shift(String userEmail, String date, String startTime, String endTime) {
         this.userEmail = userEmail;
@@ -38,6 +41,9 @@ public class Shift {
     public String getEndTime() {
         return endTime;
     }
+
+
+
 }
 
 

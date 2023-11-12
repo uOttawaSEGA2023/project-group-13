@@ -11,8 +11,15 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ViewHolder> 
 
     private List<Shift> shifts;
 
-    public ShiftAdapter(List<Shift> shifts) {
+//    //public ShiftAdapter(List<Shift> shifts) {
+//        this.shifts = shifts;
+//    }
+
+    private OnItemClickListener listener;
+
+    public ShiftAdapter(List<Shift> shifts, OnItemClickListener listener) {
         this.shifts = shifts;
+        this.listener = listener;
     }
 
     @NonNull
@@ -29,24 +36,56 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ViewHolder> 
         holder.timeTextView.setText(shift.getStartTime() + " - " + shift.getEndTime());
     }
 
-    @Override
-    public int getItemCount() {
-        return shifts.size();
+       // for when a shift is selected
+    public interface OnItemClickListener {
+        void onItemClick(Shift shift);
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
+        // Other view elements...
         TextView dateTextView;
         TextView timeTextView;
-
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
+
+            // Set click listener for the item
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        Shift clickedShift = shifts.get(position);
+                        listener.onItemClick(clickedShift);
+                    }
+                }
+            });
+
             dateTextView = itemView.findViewById(R.id.dateTextView);
             timeTextView = itemView.findViewById(R.id.timeTextView);
         }
     }
 
+
+    @Override
+    public int getItemCount() {
+        return shifts.size();
+    }
+
+//    public static class ViewHolder extends RecyclerView.ViewHolder {
+//        TextView dateTextView;
+//        TextView timeTextView;
+//
+//        public ViewHolder(@NonNull View itemView) {
+//            super(itemView);
+//            dateTextView = itemView.findViewById(R.id.dateTextView);
+//            timeTextView = itemView.findViewById(R.id.timeTextView);
+//        }
+//    }
+
     public void setShifts(List<Shift> shifts) {
         this.shifts = shifts;
     }
+
+
 
 }

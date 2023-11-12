@@ -1,10 +1,15 @@
 package com.uottawa.eecs.SEGDeliverable2;
 
 // DoctorShiftsActivity.java
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,16 +37,20 @@ import android.content.Intent;
 
 
 
-public class DoctorShiftsActivity extends AppCompatActivity {
+public class DoctorShiftsActivity extends AppCompatActivity implements ShiftAdapter.OnItemClickListener{
 
     private RecyclerView recyclerView;
     private ShiftAdapter shiftAdapter;
     private List<Shift> shifts;
     private DatabaseReference shiftsRef;
-    private FirebaseAuth mAuth;
-    private String doctorId; // Add a variable to store the doctor's ID
+
     private String userEmail;
     String sanitizeEmail;
+
+    private String key;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +58,13 @@ public class DoctorShiftsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_doctor_shifts);
 
         shifts = new ArrayList<>();
-        shiftAdapter = new ShiftAdapter(shifts);
+        shiftAdapter = new ShiftAdapter(shifts, new ShiftAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Shift shift) {
+                showUpdateDeleteDialog(shift);
+
+            }
+        });
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -64,13 +79,8 @@ public class DoctorShiftsActivity extends AppCompatActivity {
         //clean email
         sanitizeEmail = sanitizeEmail(userEmail);
 
-        //mAuth = FirebaseAuth.getInstance();
-        //FirebaseUser currentUser = mAuth.getCurrentUser();
-       // if (currentUser != null) {
-           // doctorId = currentUser.getUid();
-       // }
 
-        doctorId="doctorID";
+
 
         shiftsRef = FirebaseDatabase.getInstance().getReference("Shifts");
 
@@ -149,35 +159,9 @@ public class DoctorShiftsActivity extends AppCompatActivity {
         dialog.show();
     }
 
-//    private void loadShifts() {
-//        shiftsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                shifts.clear();
-//                for (DataSnapshot shiftSnapshot : dataSnapshot.getChildren()) {
-//                    Shift shift = shiftSnapshot.getValue(Shift.class);
-//                    if (shift != null) {
-//                        shifts.add(shift);
-//                    }
-//                }
-//
-//                // Set the updated list to the adapter
-//                shiftAdapter.setShifts(shifts);
-//
-//                // Notify the adapter that the data set has changed
-//                shiftAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                // Handle errors
-//            }
-//        });
-//    }
 
     private void loadShifts() {
-        //shiftsRef.child(userEmail).addListenerForSingleValueEvent(new ValueEventListener()
-        //String sanitizedEmail = sanitizeEmail(userEmail);
+
         shiftsRef.child(sanitizeEmail).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -204,12 +188,18 @@ public class DoctorShiftsActivity extends AppCompatActivity {
     }
 
 
-    // ... (the rest of your code remains unchanged)
 
     private void saveShiftToFirebase(Shift newShift) {
         String sanitizedEmail = sanitizeEmail(userEmail);
-        shiftsRef.child(sanitizedEmail).push().setValue(newShift);
+        DatabaseReference shiftsUserRef = shiftsRef.child(sanitizedEmail);
+
+        // Generates the key to use to delete later on
+        key = shiftsUserRef.push().getKey();
+
+        // Save the Shift object with the key to Firebase
+        shiftsUserRef.child(key).setValue(newShift);
     }
+
 
 
 
@@ -267,11 +257,49 @@ public class DoctorShiftsActivity extends AppCompatActivity {
                     .toLowerCase();
         } else {
             // Handle the case where email is null, return a default value or throw an exception
-            // For example, you can return an empty string:
             return "user email not showing";
         }
     }
 
 
+    private void deleteShift(Shift shift) {
+        // Delete the shift from Firebase using the key from the Shift object
+        String sanitizedEmail = sanitizeEmail(userEmail);
+        DatabaseReference deleteshiftRef = shiftsRef.child(sanitizedEmail).child(key);
+        deleteshiftRef.removeValue();
+
+        // Refresh the shift list
+        loadShifts();
+    }
+
+    private void showUpdateDeleteDialog(Shift shift) {
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.delete_dialog, null);
+        final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeleteProduct);
+        dialogBuilder.setView(dialogView);
+
+
+        final AlertDialog b = dialogBuilder.create();
+        b.show();
+
+
+
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteShift(shift);
+                b.dismiss();
+            }
+        });
+    }
+
+
+    @Override
+    public void onItemClick(Shift shift) {
+        showUpdateDeleteDialog(shift);
+
+    }
 }
 
