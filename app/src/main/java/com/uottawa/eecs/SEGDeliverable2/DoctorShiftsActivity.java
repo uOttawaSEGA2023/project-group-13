@@ -2,6 +2,7 @@ package com.uottawa.eecs.SEGDeliverable2;
 
 // DoctorShiftsActivity.java
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +28,8 @@ import com.google.firebase.auth.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import android.content.Intent;
+
 
 
 public class DoctorShiftsActivity extends AppCompatActivity {
@@ -37,6 +40,8 @@ public class DoctorShiftsActivity extends AppCompatActivity {
     private DatabaseReference shiftsRef;
     private FirebaseAuth mAuth;
     private String doctorId; // Add a variable to store the doctor's ID
+    private String userEmail;
+    String sanitizeEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +55,28 @@ public class DoctorShiftsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(shiftAdapter);
 
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            doctorId = currentUser.getUid();
-        }
 
-        shiftsRef = FirebaseDatabase.getInstance().getReference().child("doctors").child(doctorId).child("shifts");
+        Intent intent = getIntent();
+        if (intent != null) {
+             userEmail = intent.getStringExtra("UserEmail");
+             }
+
+        //clean email
+        sanitizeEmail = sanitizeEmail(userEmail);
+
+        //mAuth = FirebaseAuth.getInstance();
+        //FirebaseUser currentUser = mAuth.getCurrentUser();
+       // if (currentUser != null) {
+           // doctorId = currentUser.getUid();
+       // }
+
+        doctorId="doctorID";
+
+        shiftsRef = FirebaseDatabase.getInstance().getReference("Shifts");
+
+        Log.d("Debug", "User email: " + userEmail);
+        Log.d("Debug", "shiftsRef: " + shiftsRef);
+        Log.d("Debug", "sanitize email " + sanitizeEmail);
 
         Button addShiftButton = findViewById(R.id.addShiftButton);
         addShiftButton.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +132,7 @@ public class DoctorShiftsActivity extends AppCompatActivity {
 
                 if (!date.isEmpty() && !startTime.isEmpty() && !endTime.isEmpty()) {
                     // Create a new Shift object
-                    Shift newShift = new Shift(doctorId, date, startTime, endTime);
+                    Shift newShift = new Shift(userEmail, date, startTime, endTime);
 
                     // Add the new shift to Firebase
                     saveShiftToFirebase(newShift);
@@ -129,8 +149,36 @@ public class DoctorShiftsActivity extends AppCompatActivity {
         dialog.show();
     }
 
+//    private void loadShifts() {
+//        shiftsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                shifts.clear();
+//                for (DataSnapshot shiftSnapshot : dataSnapshot.getChildren()) {
+//                    Shift shift = shiftSnapshot.getValue(Shift.class);
+//                    if (shift != null) {
+//                        shifts.add(shift);
+//                    }
+//                }
+//
+//                // Set the updated list to the adapter
+//                shiftAdapter.setShifts(shifts);
+//
+//                // Notify the adapter that the data set has changed
+//                shiftAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                // Handle errors
+//            }
+//        });
+//    }
+
     private void loadShifts() {
-        shiftsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        //shiftsRef.child(userEmail).addListenerForSingleValueEvent(new ValueEventListener()
+        //String sanitizedEmail = sanitizeEmail(userEmail);
+        shiftsRef.child(sanitizeEmail).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 shifts.clear();
@@ -155,11 +203,16 @@ public class DoctorShiftsActivity extends AppCompatActivity {
         });
     }
 
+
     // ... (the rest of your code remains unchanged)
 
     private void saveShiftToFirebase(Shift newShift) {
-        shiftsRef.push().setValue(newShift);
+        String sanitizedEmail = sanitizeEmail(userEmail);
+        shiftsRef.child(sanitizedEmail).push().setValue(newShift);
     }
+
+
+
 
     private void showDatePicker(final EditText dateEditText) {
         final Calendar currentDate = Calendar.getInstance();
@@ -207,6 +260,18 @@ public class DoctorShiftsActivity extends AppCompatActivity {
         );
         timePickerDialog.show();
     }
+
+    private String sanitizeEmail(String email) {
+        if (email != null) {
+            return email.replaceAll("[^a-zA-Z0-9]", "_")
+                    .toLowerCase();
+        } else {
+            // Handle the case where email is null, return a default value or throw an exception
+            // For example, you can return an empty string:
+            return "user email not showing";
+        }
+    }
+
 
 }
 

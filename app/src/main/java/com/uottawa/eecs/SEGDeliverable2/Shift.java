@@ -2,25 +2,29 @@ package com.uottawa.eecs.SEGDeliverable2;
 
 // Shift.java
 public class Shift {
-    private String emNum;
+    private String userEmail;
     private String date;
     private String startTime;
     private String endTime;
 
+    // Default constructor required for Firebase
     public Shift() {
-        // Default constructor required for Firebase
     }
 
-    public Shift(String emNum, String date, String startTime, String endTime) {
-        this.emNum = emNum;
+    public Shift(String userEmail, String date, String startTime, String endTime) {
+        this.userEmail = userEmail;
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
-
     }
 
-    public String getEmNum() {
-        return emNum;
+    // Getter and setter for userEmail
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public String getDate() {

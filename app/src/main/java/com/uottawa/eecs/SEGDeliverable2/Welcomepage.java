@@ -12,6 +12,8 @@ import android.widget.TextView;
 public class Welcomepage extends AppCompatActivity {
 
     Button continuebutton;
+    String username;
+    String userEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +25,12 @@ public class Welcomepage extends AppCompatActivity {
         if(userTypes != null){
             String currentOccupation = userTypes.getString("Occupation");
             textView.setText("Welcome! You are logged in as a " + currentOccupation);
+
         }
+        Intent intent = getIntent();
+        if (intent != null) {
+            userEmail = intent.getStringExtra("UserEmail");
+            String occupation = intent.getStringExtra("Occupation");}
 
         continuebutton = findViewById(R.id.continueButton);
 
@@ -58,6 +65,8 @@ public class Welcomepage extends AppCompatActivity {
 
     public void OpenDoctorShift(){
         Intent intent = new Intent(this, DoctorShiftsActivity.class);
+        intent.putExtra("UserEmail", userEmail);  // Include userEmail in the Intent
+        intent.putExtra("SanitizedUsername", username);
         startActivity(intent);
 
     }

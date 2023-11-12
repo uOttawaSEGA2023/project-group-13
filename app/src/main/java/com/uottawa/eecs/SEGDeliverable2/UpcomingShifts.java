@@ -73,11 +73,11 @@ public class UpcomingShifts extends AppCompatActivity {
                 endTime();
                 startTime();
                 openCalendar();
-                //UpcomingShiftModel addedShift = new UpcomingShiftModel(newShift, newTime);
-                //int positionToAdd = Shifts.size();
+                UpcomingShiftModel addedShift = new UpcomingShiftModel(newShift, newTime);
+                int positionToAdd = Shifts.size();
 
-                //adapter.addItem(addedShift,positionToAdd);
-                //setUpcomingShiftModels();
+                adapter.addItem(addedShift,positionToAdd);
+                setUpcomingShiftModels();
 
             }
         });

@@ -30,6 +30,8 @@ public class LoginPage extends AppCompatActivity {
 
     String currentOccupation;
 
+    String sanitizedUsername;
+
 
 
 
@@ -47,6 +49,7 @@ public class LoginPage extends AppCompatActivity {
 
 
 
+
         //what happens when to click login button (authenticate)
         loginbutton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -60,7 +63,7 @@ public class LoginPage extends AppCompatActivity {
                 if(loginUsername.toLowerCase().equals("user@admin.com") && loginPassword.equals("password")) {
                     username.setError(null); // this prevents any "user does not exist" popups from being displayed
                     password.setError(null);
-                    OpenWelcomePage("Admin");
+                    OpenWelcomePage(loginUsername,"Admin");
                     return;
                 }
 
@@ -72,7 +75,7 @@ public class LoginPage extends AppCompatActivity {
                 }
 
                 // replace @ and . in the email with _ since it cannot have those in the key
-                String sanitizedUsername = loginUsername
+                 sanitizedUsername = loginUsername
                         .replaceAll("[^a-zA-Z0-9]", "_")
                         .toLowerCase();
 
@@ -95,7 +98,7 @@ public class LoginPage extends AppCompatActivity {
                             if(Objects.equals(passwordFromDB, loginPassword)){
                                 username.setError(null);
                                 String type = snapshot.child("type").getValue(String.class);
-                                OpenWelcomePage(type);
+                                OpenWelcomePage(loginUsername,type);
                             }
                             else{
                                 password.setError("Invalid Credentials");
@@ -187,11 +190,12 @@ public class LoginPage extends AppCompatActivity {
     }
 
 
-    public void OpenWelcomePage(String currentOccupation){
+    public void OpenWelcomePage(String userEmail, String currentOccupation) {
         Intent intent = new Intent(this, Welcomepage.class);
-        //passing username data to the next activity
+        // Passing user data to the next activity
+        intent.putExtra("UserEmail", userEmail);
+        intent.putExtra("SanitizedUsername", sanitizedUsername);
         intent.putExtra("Occupation", currentOccupation);
-        startActivity(intent);
-    }
+        startActivity(intent); }
 
 }

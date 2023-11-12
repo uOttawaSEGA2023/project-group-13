@@ -17,12 +17,8 @@
         tools:targetApi="31">
         <activity
             android:name=".DoctorShiftsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Doc_Shifts"
-            android:exported="false"
-            android:label="@string/title_activity_doc_shifts"
-            android:theme="@style/Theme.SEGDeliverable1" />
+            android:exported="true" />
+
         <activity
             android:name=".LogoutPage"
             android:exported="false" />
@@ -48,12 +44,15 @@
             android:theme="@style/Theme.Material3.Light.NoActionBar" /> <!-- <meta-data android:name="preloaded_fonts" android:resource="@array/preloaded_fonts"/> -->
         <activity
             android:name=".Welcomepage"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".LoginPage"
             android:exported="true" />
         <activity
             android:name=".AdminHomePage"
+            android:exported="true" />
+        <activity
+            android:name=".UpcomingShifts"
             android:exported="true" />
     </application>
 
