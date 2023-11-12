@@ -44,4 +44,9 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ViewHolder> 
             timeTextView = itemView.findViewById(R.id.timeTextView);
         }
     }
+
+    public void setShifts(List<Shift> shifts) {
+        this.shifts = shifts;
+    }
+
 }
