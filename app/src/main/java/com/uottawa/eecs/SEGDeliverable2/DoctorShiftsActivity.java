@@ -1,6 +1,6 @@
 package com.uottawa.eecs.SEGDeliverable2;
 
-// DoctorShiftsActivity.java
+
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -68,6 +68,7 @@ public class DoctorShiftsActivity extends AppCompatActivity implements ShiftAdap
                 showUpdateDeleteDialog(shift);
 
             }
+
         });
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -137,7 +138,6 @@ public class DoctorShiftsActivity extends AppCompatActivity implements ShiftAdap
             }
         });
 
-        key = shiftsRef.child(sanitizeEmail).push().getKey();
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -233,8 +233,10 @@ public class DoctorShiftsActivity extends AppCompatActivity implements ShiftAdap
         String sanitizedEmail = sanitizeEmail(userEmail);
         DatabaseReference shiftsUserRef = shiftsRef.child(sanitizedEmail);
         // Generates the key to use to delete later on
-        key = shiftsUserRef.push().getKey();
-        shiftsUserRef.child(key).setValue(newShift);
+        String firebasekey = shiftsUserRef.push().getKey(); // Generate a new key
+        newShift.setKey(firebasekey); // Set the key in the Shift object
+        //key = shiftsUserRef.push().getKey();
+        shiftsUserRef.child(firebasekey).setValue(newShift);
 
 
     }
@@ -306,8 +308,11 @@ public class DoctorShiftsActivity extends AppCompatActivity implements ShiftAdap
     private void deleteShift(Shift shift) {
         // Delete the shift from Firebase using the provided key
         String sanitizedEmail = sanitizeEmail(userEmail);
-        DatabaseReference deleteshiftRef = shiftsRef.child(sanitizedEmail).child(key);
+        String shiftKey = shift.getKey();
+        DatabaseReference deleteshiftRef = shiftsRef.child(sanitizedEmail).child(shiftKey);
         deleteshiftRef.removeValue();
+//        DatabaseReference deleteshiftRef = shiftsRef.child(sanitizedEmail).child(key);
+//        deleteshiftRef.removeValue();
 
         loadShifts();
     }
@@ -335,11 +340,6 @@ public class DoctorShiftsActivity extends AppCompatActivity implements ShiftAdap
     }
 
 
-    @Override
-    public void onItemClick(Shift shift) {
-        showUpdateDeleteDialog(shift);
-
-    }
 
 
     private boolean isDateValid(String selectedDate) {
@@ -364,6 +364,12 @@ public class DoctorShiftsActivity extends AppCompatActivity implements ShiftAdap
             return false;
         }
 
+    }
+
+
+    @Override
+    public void onItemClick(Shift shift) {
+        showUpdateDeleteDialog(shift);
     }
 }
 

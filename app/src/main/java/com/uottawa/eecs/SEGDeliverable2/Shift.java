@@ -7,6 +7,8 @@ public class Shift {
     private String startTime;
     private String endTime;
 
+    private String firebaseKey;
+
 
     // Default constructor required for Firebase
     public Shift() {
@@ -19,6 +21,7 @@ public class Shift {
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
+
     }
 
     // Getter and setter for userEmail
@@ -42,6 +45,13 @@ public class Shift {
         return endTime;
     }
 
+    public String getKey() {
+        return firebaseKey;
+    }
+
+    public void setKey(String firebaseKey) {
+        this.firebaseKey = firebaseKey;
+    }
 
 
 }

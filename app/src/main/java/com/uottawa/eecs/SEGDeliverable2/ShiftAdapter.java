@@ -2,6 +2,8 @@ package com.uottawa.eecs.SEGDeliverable2;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,9 +16,11 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ViewHolder> 
 
     private OnItemClickListener listener;
 
+
     public ShiftAdapter(List<Shift> shifts, OnItemClickListener listener) {
         this.shifts = shifts;
         this.listener = listener;
+
     }
 
     @NonNull
@@ -31,9 +35,23 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ViewHolder> 
         Shift shift = shifts.get(position);
         holder.dateTextView.setText(shift.getDate());
         holder.timeTextView.setText(shift.getStartTime() + " - " + shift.getEndTime());
+        Shift currentShift = shifts.get(position);
+
+        // Set up the click listener for the remove button
+
+
+
+
+
     }
 
+
+
        // for when a shift is selected
+//    public interface OnItemClickListener {
+//        void onItemClick(Shift shift);
+//    }
+
     public interface OnItemClickListener {
         void onItemClick(Shift shift);
     }
@@ -42,6 +60,7 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ViewHolder> 
 
         TextView dateTextView;
         TextView timeTextView;
+
         ViewHolder(View itemView) {
             super(itemView);
 
@@ -56,9 +75,9 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ViewHolder> 
                     }
                 }
             });
-
             dateTextView = itemView.findViewById(R.id.dateTextView);
             timeTextView = itemView.findViewById(R.id.timeTextView);
+
         }
     }
 
