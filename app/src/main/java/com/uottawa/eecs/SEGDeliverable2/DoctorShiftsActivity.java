@@ -18,7 +18,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -34,7 +37,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 import android.content.Intent;
-
+import android.widget.Toast;
+import java.util.UUID;
 
 
 public class DoctorShiftsActivity extends AppCompatActivity implements ShiftAdapter.OnItemClickListener{
@@ -133,6 +137,8 @@ public class DoctorShiftsActivity extends AppCompatActivity implements ShiftAdap
             }
         });
 
+        key = shiftsRef.child(sanitizeEmail).push().getKey();
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,9 +148,43 @@ public class DoctorShiftsActivity extends AppCompatActivity implements ShiftAdap
 
                 if (!date.isEmpty() && !startTime.isEmpty() && !endTime.isEmpty()) {
                     // Create a new Shift object
+
+                    if (!isDateValid(date)) {
+                        // Show an error message or toast indicating that the selected date has already passed
+                        Toast.makeText(DoctorShiftsActivity.this, "Please select a future date.", Toast.LENGTH_SHORT).show();
+                        return;
+
+                    }
+
+                    if(isDateValid(date)){
+                        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.US);
+
+                        Date startTimeDate = null;
+                        try {
+                            startTimeDate = timeFormat.parse(startTime);
+                            Date endTimeDate = timeFormat.parse(endTime);
+                            long durationMillis = endTimeDate.getTime() - startTimeDate.getTime();
+                            int durationMinutes = (int) (durationMillis / (60 * 1000));
+
+                            if(!checkInterval(durationMinutes)){
+
+                                Toast.makeText(DoctorShiftsActivity.this, "Please enter a duration of 30 minute interval.", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
+
+
+
+                    }
+
+
                     Shift newShift = new Shift(userEmail, date, startTime, endTime);
 
                     // Add the new shift to Firebase
+
                     saveShiftToFirebase(newShift);
 
                     // Refresh the shift list
@@ -192,12 +232,11 @@ public class DoctorShiftsActivity extends AppCompatActivity implements ShiftAdap
     private void saveShiftToFirebase(Shift newShift) {
         String sanitizedEmail = sanitizeEmail(userEmail);
         DatabaseReference shiftsUserRef = shiftsRef.child(sanitizedEmail);
-
         // Generates the key to use to delete later on
         key = shiftsUserRef.push().getKey();
-
-        // Save the Shift object with the key to Firebase
         shiftsUserRef.child(key).setValue(newShift);
+
+
     }
 
 
@@ -256,19 +295,20 @@ public class DoctorShiftsActivity extends AppCompatActivity implements ShiftAdap
             return email.replaceAll("[^a-zA-Z0-9]", "_")
                     .toLowerCase();
         } else {
-            // Handle the case where email is null, return a default value or throw an exception
+            // in case of error
             return "user email not showing";
         }
     }
 
 
+
+
     private void deleteShift(Shift shift) {
-        // Delete the shift from Firebase using the key from the Shift object
+        // Delete the shift from Firebase using the provided key
         String sanitizedEmail = sanitizeEmail(userEmail);
         DatabaseReference deleteshiftRef = shiftsRef.child(sanitizedEmail).child(key);
         deleteshiftRef.removeValue();
 
-        // Refresh the shift list
         loadShifts();
     }
 
@@ -285,7 +325,6 @@ public class DoctorShiftsActivity extends AppCompatActivity implements ShiftAdap
         b.show();
 
 
-
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -299,6 +338,31 @@ public class DoctorShiftsActivity extends AppCompatActivity implements ShiftAdap
     @Override
     public void onItemClick(Shift shift) {
         showUpdateDeleteDialog(shift);
+
+    }
+
+
+    private boolean isDateValid(String selectedDate) {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+            Date currentDate = new Date();
+            Date selected = dateFormat.parse(selectedDate);
+
+            // if in the past returns false
+            return (!selected.before(currentDate));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private boolean checkInterval(int duration){
+        if(duration % 30 == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
 
     }
 }

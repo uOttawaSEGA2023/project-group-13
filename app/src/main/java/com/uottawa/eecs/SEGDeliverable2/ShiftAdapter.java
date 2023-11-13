@@ -11,9 +11,6 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ViewHolder> 
 
     private List<Shift> shifts;
 
-//    //public ShiftAdapter(List<Shift> shifts) {
-//        this.shifts = shifts;
-//    }
 
     private OnItemClickListener listener;
 
@@ -42,7 +39,7 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ViewHolder> 
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        // Other view elements...
+
         TextView dateTextView;
         TextView timeTextView;
         ViewHolder(View itemView) {
@@ -71,16 +68,7 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ViewHolder> 
         return shifts.size();
     }
 
-//    public static class ViewHolder extends RecyclerView.ViewHolder {
-//        TextView dateTextView;
-//        TextView timeTextView;
-//
-//        public ViewHolder(@NonNull View itemView) {
-//            super(itemView);
-//            dateTextView = itemView.findViewById(R.id.dateTextView);
-//            timeTextView = itemView.findViewById(R.id.timeTextView);
-//        }
-//    }
+
 
     public void setShifts(List<Shift> shifts) {
         this.shifts = shifts;
