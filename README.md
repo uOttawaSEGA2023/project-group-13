@@ -1,5 +1,7 @@
  Admin login: user: user@admin.com pass: password 
 
+ A working Doctor account is: jane@gmail.com janepassword
+
 -- Group Information --
 
 Lydia Roy 300309479
