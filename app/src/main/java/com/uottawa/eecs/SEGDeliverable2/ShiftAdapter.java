@@ -17,7 +17,7 @@ public class ShiftAdapter extends RecyclerView.Adapter<ShiftAdapter.ViewHolder> 
     private OnItemClickListener listener;
 
 
-    public ShiftAdapter(List<Shift> shifts, OnItemClickListener listener) {
+    public ShiftAdapter(List<Shift> shifts, OnItemClickListener onItemClickListener) {
         this.shifts = shifts;
         this.listener = listener;
 

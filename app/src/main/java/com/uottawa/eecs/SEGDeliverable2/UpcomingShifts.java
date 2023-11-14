@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
+
 public class UpcomingShifts extends AppCompatActivity {
 
     /*
@@ -164,6 +165,12 @@ public class UpcomingShifts extends AppCompatActivity {
 
 
                 newTime = ("Time:" + displayTime + "-" + endTime);
+
+//                int duration = Integer.parseInt(endTime) - Integer.parseInt(displayTime);
+//                if(duration % 30 == 0){
+//                    Time.add(newTime);
+//                }
+                //else tell them to pick a proper time?
                 /*
                 Here before adding the time and date to the Shift and Time list. We should check that
                 the date hasn't passed and that the start time and end time's minute value is 0  or 3.
@@ -171,9 +178,6 @@ public class UpcomingShifts extends AppCompatActivity {
                 and Time can be removed once firebase is used.
 
                  */
-                Time.add(newTime);
-
-
                 UpcomingShiftModel addedShift = new UpcomingShiftModel(newShift, newTime);
                 int positionToAdd = Shifts.size();
 
@@ -191,8 +195,6 @@ public class UpcomingShifts extends AppCompatActivity {
         dialog.show();
 
     }
-
-
 
 
 }

@@ -1,6 +1,6 @@
 package com.uottawa.eecs.SEGDeliverable2;
 
-
+// DoctorShiftsActivity.java
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -68,7 +68,6 @@ public class DoctorShiftsActivity extends AppCompatActivity implements ShiftAdap
                 showUpdateDeleteDialog(shift);
 
             }
-
         });
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -138,6 +137,7 @@ public class DoctorShiftsActivity extends AppCompatActivity implements ShiftAdap
             }
         });
 
+        key = shiftsRef.child(sanitizeEmail).push().getKey();
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,15 +148,26 @@ public class DoctorShiftsActivity extends AppCompatActivity implements ShiftAdap
 
                 if (!date.isEmpty() && !startTime.isEmpty() && !endTime.isEmpty()) {
                     // Create a new Shift object
+                    Shift newShift = new Shift(userEmail, date, startTime, endTime);
 
                     if (!isDateValid(date)) {
                         // Show an error message or toast indicating that the selected date has already passed
                         Toast.makeText(DoctorShiftsActivity.this, "Please select a future date.", Toast.LENGTH_SHORT).show();
                         return;
 
-                    }
+                        //checking to see if the shift is conflicting with another one
+                    } else if (!shiftConflict(newShift)) {
+                        // Save the new shift to Firebase
+                        saveShiftToFirebase(newShift);
 
-                    if(isDateValid(date)){
+                        // Refresh the shift list
+                        loadShifts();
+
+                        // Dismiss the dialog
+                        dialog.dismiss();
+                        }
+
+                    if (isDateValid(date)) {
                         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.US);
 
                         Date startTimeDate = null;
@@ -166,7 +177,7 @@ public class DoctorShiftsActivity extends AppCompatActivity implements ShiftAdap
                             long durationMillis = endTimeDate.getTime() - startTimeDate.getTime();
                             int durationMinutes = (int) (durationMillis / (60 * 1000));
 
-                            if(!checkInterval(durationMinutes)){
+                            if (!checkInterval(durationMinutes)) {
 
                                 Toast.makeText(DoctorShiftsActivity.this, "Please enter a duration of 30 minute interval.", Toast.LENGTH_SHORT).show();
                                 return;
@@ -177,23 +188,11 @@ public class DoctorShiftsActivity extends AppCompatActivity implements ShiftAdap
                         }
 
 
-
                     }
 
-
-                    Shift newShift = new Shift(userEmail, date, startTime, endTime);
-
-                    // Add the new shift to Firebase
-
-                    saveShiftToFirebase(newShift);
-
-                    // Refresh the shift list
-                    loadShifts();
-
-                    // Dismiss the dialog
-                    dialog.dismiss();
                 }
             }
+
         });
 
         dialog.show();
@@ -233,10 +232,8 @@ public class DoctorShiftsActivity extends AppCompatActivity implements ShiftAdap
         String sanitizedEmail = sanitizeEmail(userEmail);
         DatabaseReference shiftsUserRef = shiftsRef.child(sanitizedEmail);
         // Generates the key to use to delete later on
-        String firebasekey = shiftsUserRef.push().getKey(); // Generate a new key
-        newShift.setKey(firebasekey); // Set the key in the Shift object
-        //key = shiftsUserRef.push().getKey();
-        shiftsUserRef.child(firebasekey).setValue(newShift);
+        key = shiftsUserRef.push().getKey();
+        shiftsUserRef.child(key).setValue(newShift);
 
 
     }
@@ -307,14 +304,18 @@ public class DoctorShiftsActivity extends AppCompatActivity implements ShiftAdap
 
     private void deleteShift(Shift shift) {
         // Delete the shift from Firebase using the provided key
-        String sanitizedEmail = sanitizeEmail(userEmail);
-        String shiftKey = shift.getKey();
-        DatabaseReference deleteshiftRef = shiftsRef.child(sanitizedEmail).child(shiftKey);
-        deleteshiftRef.removeValue();
-//        DatabaseReference deleteshiftRef = shiftsRef.child(sanitizedEmail).child(key);
-//        deleteshiftRef.removeValue();
+        try{
+            String sanitizedEmail = sanitizeEmail(userEmail);
+            String delKey = shift.getKey();
+            DatabaseReference deleteshiftRef = shiftsRef.child(sanitizedEmail).child(delKey);
+            deleteshiftRef.removeValue();
+            shiftAdapter.notifyDataSetChanged();
 
-        loadShifts();
+            loadShifts();
+        }catch (Exception exception){
+            exception.printStackTrace();
+        }
+
     }
 
     private void showUpdateDeleteDialog(Shift shift) {
@@ -340,6 +341,11 @@ public class DoctorShiftsActivity extends AppCompatActivity implements ShiftAdap
     }
 
 
+    @Override
+    public void onItemClick(Shift shift) {
+        showUpdateDeleteDialog(shift);
+
+    }
 
 
     private boolean isDateValid(String selectedDate) {
@@ -366,10 +372,40 @@ public class DoctorShiftsActivity extends AppCompatActivity implements ShiftAdap
 
     }
 
+    private boolean shiftConflict(Shift newShift) {
 
-    @Override
-    public void onItemClick(Shift shift) {
-        showUpdateDeleteDialog(shift);
+        for (Shift shift : shifts) {
+            //create variables to parse the strings into a valid date objects
+
+            String newShiftGST = newShift.getStartTime();
+            String newShiftGET = newShift.getEndTime();
+            String shiftGST = shift.getStartTime();
+            String shiftGET = shift.getEndTime();
+
+            // Check if the new shift's date overlaps with any existing shift
+            if (newShift.getDate().equals(shift.getDate())) {
+                // Parsing variables
+                SimpleDateFormat time = new SimpleDateFormat("HH:mm", Locale.US);
+                try {
+                    Date newStartTime = time.parse(newShiftGST);
+                    Date newEndTime = time.parse(newShiftGET);
+                    Date shiftStartTime = time.parse(shiftGST);
+                    Date shiftEndTime = time.parse(shiftGET);
+
+                    // Check to see if new shift starts before existing shifts end time and
+                    // if the new shift ends after the existing shifts start time
+                    if ((newStartTime.before(shiftEndTime)) && (newEndTime.after(shiftStartTime))) {
+                        // If there is a conflict then show this message and return true
+                        Toast.makeText(DoctorShiftsActivity.this, "Shift conflict: select another date and time", Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                } catch (ParseException exception) {
+                    exception.printStackTrace();
+                }
+            }
+        }
+        // If no conflicts are found then the boolean is not true
+        return false;
     }
 }
 
