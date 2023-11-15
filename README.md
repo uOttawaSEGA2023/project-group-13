@@ -1,7 +1,7 @@
 Admin login: user: user@admin.com pass: password
 
 A doctor account which has appointments under it: user: jane@gmail.com pass: janepassword
-^ just in case its needed to test that appointments could be accepted/deleted/viewed past appointments
+just in case its needed to test that appointments could be accepted/deleted/viewed past appointments
 
 -- Group Information --
 
