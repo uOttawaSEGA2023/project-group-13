@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="6dp"
+    android:elevation="6dp"
+    app:cardUseCompatPadding="true" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:background="#FAF7FD">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/appointmentTitle"
+            android:text="Appointment"
+            android:textSize="18sp"
+            android:fontFamily="@font/barlow_semibold"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/appointmentDateTime"
+            android:layout_below="@+id/appointmentTitle"
+            android:text="Date and Time"
+            android:textSize="18sp"
+            android:fontFamily="@font/barlow_semibold"
+            android:textColor="@color/black"/>
+
+
+        <LinearLayout
+            android:id="@+id/expandableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_below="@+id/appointmentDateTime">
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id= "@+id/FirstNameText"
+                android:text="First Name"
+                android:textSize="15sp"
+                android:fontFamily="@font/barlow_semibold"
+                android:textColor="@color/black"
+                android:layout_below="@id/appointmentDateTime">
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id= "@+id/LastNameText"
+                android:text="Last Name"
+                android:textSize="15sp"
+                android:fontFamily="@font/barlow_semibold"
+                android:textColor="@color/black"
+                android:layout_below="@+id/FirstNameText">
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id= "@+id/EmailText"
+                android:text="Email"
+                android:textSize="15sp"
+                android:fontFamily="@font/barlow_semibold"
+                android:textColor="@color/black"
+                android:layout_below="@+id/LastNameText">
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id= "@+id/PhoneNumberText"
+                android:text="Phone Number"
+                android:textSize="15sp"
+                android:fontFamily="@font/barlow_semibold"
+                android:textColor="@color/black"
+
+                android:layout_below="@+id/EmailText">
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id= "@+id/StreetNumberText"
+                android:text="Street Number"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/barlow_semibold"
+
+                android:layout_below="@+id/PhoneNumberText">
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id= "@+id/StreetText"
+                android:text="Street"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/barlow_semibold"
+
+                android:layout_below="@+id/StreetNumberText">
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id= "@+id/CityText"
+                android:text="City"
+                android:textSize="15sp"
+                android:fontFamily="@font/barlow_semibold"
+                android:textColor="@color/black"
+
+                android:layout_below="@+id/StreetText">
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id= "@+id/ProvinceText"
+                android:text="Province/Territory"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/barlow_semibold"
+                android:layout_below="@+id/CityText">
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id= "@+id/NumberText"
+                android:text="Employee/Health Card Number"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/barlow_semibold"
+                android:layout_below="@+id/ProvinceText">
+            </TextView>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/expandButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="3dp"
+            android:text="Expand"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
