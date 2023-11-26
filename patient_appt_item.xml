@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="6dp"
+    android:elevation="6dp"
+    android:id="@+id/patientCard"
+    app:cardUseCompatPadding="true" >
+
+
+    <!-- Need to add items-->
+    <!-- android:text will probably be moved-->
+    <!-- personIcon will probably be replaced with a 'D' or a 'P' to identify patients and doctors?-->
+    <!-- for now it can just be a text field im lazy-->
+
+    <RelativeLayout
+        android:layout_width="411dp"
+        android:layout_height="144dp"
+        android:background="#FAF7FD"
+        android:padding="15dp">
+
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/personIcon"
+            android:layout_width="95dp"
+            android:layout_height="88dp"
+            android:layout_marginStart="-10dp"
+            android:layout_marginTop="-10dp"
+            android:layout_marginEnd="-10dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginBottom="-11dp"
+            android:src="@drawable/appticon"></androidx.constraintlayout.utils.widget.ImageFilterView>
+
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="97dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/timeTextView"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="90dp"
+            android:layout_marginTop="1dp"
+
+            android:backgroundTint="@color/light_blue"
+            android:fontFamily="@font/barlow_semibold"
+            android:text="Date"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/timeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="90dp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/barlow_semibold"
+            android:text="Time Range"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/DoctorName"
+            android:layout_width="389dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="56dp"
+            android:fontFamily="@font/barlow_semibold"
+            android:text="Doctor Name"
+            android:textAlignment="viewEnd"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/addRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/DoctorName"
+            android:text="rate"
+            android:layout_centerInParent="true"
+            />
+
+
+
+
+
+
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
