@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".UpcomingShifts">
+    tools:context=".doctor.shift.UpcomingShifts">
 
     <!-- Figure out a way to add a card everytime a button is clicked-->
 

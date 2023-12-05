@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center"
 
-    tools:context=".LoginPage">
+    tools:context=".main.ui.LoginPage">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

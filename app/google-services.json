@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "433494971510",
-    "project_id": "test-admin-d5198",
-    "storage_bucket": "test-admin-d5198.appspot.com"
+    "project_number": "1070396966991",
+    "project_id": "d4-base",
+    "storage_bucket": "d4-base.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:433494971510:android:539c91750ddc3d509d3b57",
+        "mobilesdk_app_id": "1:1070396966991:android:86a7ac769ad782347c423a",
         "android_client_info": {
-          "package_name": "com.uottawa.eecs.SEGDeliverable3"
+          "package_name": "com.uottawa.eecs.SEGDeliverable4"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCisb6BZeswxIhkJHAGE7QwUW4XQl6weCI"
+          "current_key": "AIzaSyAtR4Evpz7MPA28qc3tLNTtoZlPyGOphkI"
         }
       ],
       "services": {

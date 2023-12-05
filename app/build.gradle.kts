@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.uottawa.eecs.SEGDeliverable3"
+    namespace = "com.uottawa.eecs.SEGDeliverable4"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.uottawa.eecs.SEGDeliverable3"
+        applicationId = "com.uottawa.eecs.SEGDeliverable4"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "SEGDeliverable3"
+rootProject.name = "SEGDeliverable4"
 include(":app")
  

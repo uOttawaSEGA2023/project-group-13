@@ -108,6 +108,7 @@
         android:layout_height="40dp"
         android:fontFamily="@font/barlow_semibold"
         android:text="Date"
+        android:backgroundTint="@color/light_blue"
         android:textSize="18sp" />
 
     <TextView
